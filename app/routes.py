@@ -30,10 +30,22 @@ class ChildrenList(Resource):
 @ns.route('/children/<int:id>', endpoint='children')
 @api.doc(responses={404: "child not found"})
 @api.doc(responses={200: "success"})
-@api.doc(params={'all': 'Add, update, or delete one child'})
 class Children(Resource):
     @ns.marshal_with(child_model)
+    @api.doc(params={'id': 'Record id to display'})
     def get(self, id):
         child = Child.query.get(id)
 
         return child
+    
+    @ns.expect(add_child_model)
+    @ns.marshal_with(child_model)
+    @api.doc(params={'id': 'Record id to update'})
+    def put(self, id):
+        child = Child.query.get(id)
+        child.name = ns.payload['name']
+
+        db.session.add(child)
+        db.session.commit()
+
+        return child, 200
