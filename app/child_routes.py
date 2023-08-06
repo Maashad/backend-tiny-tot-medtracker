@@ -8,17 +8,15 @@ from .response_models import child_model, add_child_model
 ns = Namespace("api")
 
 @ns.route("/children")
-@api.doc(responses={404: "children not found, please add a child"})
-@api.doc(responses={200: "success"})
-@api.doc(params={'get': 'Look up all children in the database',
-                'post': 'Add one child to the database'})
 class ChildrenList(Resource):
     @ns.marshal_list_with(child_model)
+    @api.doc(params={'Get': 'Look up all children in the database'})
     def get(self):
         return Child.query.all()
     
     @ns.expect(add_child_model)
     @ns.marshal_with(child_model)
+    @api.doc(params={'Name': 'Add one child to the database'})
     def post(self):
         child = Child(name=ns.payload['name'])
 
@@ -49,3 +47,12 @@ class Children(Resource):
         db.session.commit()
 
         return child, 200
+    
+    @api.doc(params={'id': 'Record id to delete'})
+    def delete(self, id):
+        child = Child.query.get(id)
+
+        db.session.delete(child)
+        db.session.commit()
+
+        return {}, 204

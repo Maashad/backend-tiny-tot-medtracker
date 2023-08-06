@@ -1,6 +1,6 @@
 from flask import Flask
 from .extensions import api, db
-from .routes import ns
+from .child_routes import ns
 
 def create_app():
     app = Flask(__name__)
