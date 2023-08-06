@@ -10,7 +10,8 @@ ns = Namespace("api")
 @ns.route("/children")
 @api.doc(responses={404: "children not found, please add a child"})
 @api.doc(responses={200: "success"})
-@api.doc(params={'all': 'Look up all children in the database'})
+@api.doc(params={'get': 'Look up all children in the database',
+                'post': 'Add one child to the database'})
 class ChildrenList(Resource):
     @ns.marshal_list_with(child_model)
     def get(self):
@@ -25,3 +26,14 @@ class ChildrenList(Resource):
         db.session.commit()
 
         return child, 201
+
+@ns.route('/children/<int:id>', endpoint='children')
+@api.doc(responses={404: "child not found"})
+@api.doc(responses={200: "success"})
+@api.doc(params={'all': 'Add, update, or delete one child'})
+class Children(Resource):
+    @ns.marshal_with(child_model)
+    def get(self, id):
+        child = Child.query.get(id)
+
+        return child
