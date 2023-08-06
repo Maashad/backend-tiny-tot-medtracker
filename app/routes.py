@@ -1,7 +1,7 @@
 from flask_restx import Resource, Namespace
 from .models import Child, Medication
 from .extensions import db, api
-from .response_models import child_model
+from .response_models import child_model, add_child_model
 
 # set up endpoints for HTTP requests
 
@@ -15,3 +15,13 @@ class ChildrenList(Resource):
     @ns.marshal_list_with(child_model)
     def get(self):
         return Child.query.all()
+    
+    @ns.expect(add_child_model)
+    @ns.marshal_with(child_model)
+    def post(self):
+        child = Child(name=ns.payload['name'])
+
+        db.session.add(child)
+        db.session.commit()
+
+        return child, 201
