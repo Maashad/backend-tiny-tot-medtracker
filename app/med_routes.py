@@ -14,3 +14,16 @@ class MedicationList(Resource):
     def get(self):
         return Medication.query.all()
     
+    @ns_med.expect(add_medication_model)
+    @ns_med.marshal_with(medication_model)
+    def post(self):
+        medication = Medication(
+            name=ns_med.payload['name'],
+            dose=ns_med.payload['dose'],
+            frequency=ns_med.payload['frequency']
+        )
+
+        db.session.add(medication)
+        db.session.commit()
+
+        return medication, 201
