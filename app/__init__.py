@@ -1,6 +1,7 @@
 from flask import Flask
 from .extensions import api, db
-from .child_routes import ns
+from .child_routes import ns_child
+from .med_routes import ns_med
 
 def create_app():
     app = Flask(__name__)
@@ -12,6 +13,7 @@ def create_app():
     api.init_app(app)
     db.init_app(app)
 
-    api.add_namespace(ns)
+    api.add_namespace(ns_child)
+    api.add_namespace(ns_med)
 
     return app
