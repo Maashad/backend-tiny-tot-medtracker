@@ -26,8 +26,6 @@ class ChildrenList(Resource):
         return child, 201
 
 @ns_child.route('/children/<int:id>', endpoint='children')
-@api.doc(respons_childes={404: "child not found"})
-@api.doc(respons_childes={200: "success"})
 class Children(Resource):
     @ns_child.marshal_with(child_model)
     @api.doc(params={'id': 'Record id to display'})
