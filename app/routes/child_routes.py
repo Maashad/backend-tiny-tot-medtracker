@@ -1,7 +1,7 @@
 from flask_restx import Resource, Namespace
-from .models import Child, Medication
-from .extensions import db, api
-from .response_models import child_model, add_child_model
+from ..models.child_model import Child
+from ..extensions import db, api
+from ..models.response_models import child_model, add_child_model
 
 # endpoints for child HTTP requests
 

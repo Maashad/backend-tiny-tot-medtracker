@@ -1,7 +1,7 @@
 # Models to represent the structure of a JSON serializable HTTP response
 
 from flask_restx import fields
-from .extensions import api
+from ..extensions import api
 
 medication_model = api.model('Medications', {
     'id': fields.Integer,
