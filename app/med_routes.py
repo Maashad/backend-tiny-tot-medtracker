@@ -34,4 +34,13 @@ class Medications(Resource):
     def get(self, id):
         medication = Medication.query.get(id)
 
-        return medication
+        return medication, 200
+
+    @api.doc(params={'id': 'Record id to delete'})
+    def delete(self, id):
+        medication = Medication.query.get(id)
+
+        db.session.delete(medication)
+        db.session.commit()
+
+        return {}, 204
