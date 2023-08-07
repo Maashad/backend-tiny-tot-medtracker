@@ -27,3 +27,11 @@ class MedicationList(Resource):
         db.session.commit()
 
         return medication, 201
+
+@ns_med.route('/medications/<int:id>', endpoint='medications')
+class Medications(Resource):
+    @ns_med.marshal_with(medication_model)
+    def get(self, id):
+        medication = Medication.query.get(id)
+
+        return medication

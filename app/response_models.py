@@ -7,7 +7,8 @@ medication_model = api.model('Medications', {
     'id': fields.Integer,
     'name': fields.String,
     'dose': fields.String,
-    'frequency': fields.Integer
+    'frequency': fields.Integer,
+    'child_id': fields.Integer
 })
 
 child_model = api.model('Child', {
@@ -20,7 +21,7 @@ add_child_model = api.model('AddChild', {
     'name': fields.String
 })
 
-add_medication_model = api.model('Medication', {
+add_medication_model = api.model('AddMedication', {
     'name': fields.String,
     'dose': fields.String,
     'frequency': fields.Integer
