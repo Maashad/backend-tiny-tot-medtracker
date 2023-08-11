@@ -5,11 +5,13 @@ import os
 from .extensions import api, db
 from .routes.child_routes import ns_child
 from .routes.med_routes import ns_med
+from flask_cors import CORS
 
 load_dotenv
 
 def create_app(test_config=None):
     app = Flask(__name__)
+    CORS(app)
 
     migrate = Migrate(app, db)
 
