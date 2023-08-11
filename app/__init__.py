@@ -11,7 +11,7 @@ load_dotenv
 
 def create_app(test_config=None):
     app = Flask(__name__)
-    CORS(app)
+    CORS(app, origins=["http://localhost:3000", "https://medication-tracker-frontend.herokuapp.com/"])
 
     migrate = Migrate(app, db)
 
