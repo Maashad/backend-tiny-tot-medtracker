@@ -1,5 +1,7 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_restx import Api
 from dotenv import load_dotenv
 import os
 from .extensions import api, db
@@ -9,9 +11,12 @@ from flask_cors import CORS
 
 load_dotenv
 
+# db = SQLAlchemy()
+# api = Api(version='1.0', title='Tiny Tot MedTracker', description='Custom API for tracking child medications')
+
 def create_app(test_config=None):
     app = Flask(__name__)
-    CORS(app, origins=["http://localhost:3000", "https://medication-tracker-frontend.herokuapp.com/"])
+    CORS(app, origins=["http://localhost:3000", "https://tiny-tot-medtracker.onrender.com/"])
 
     migrate = Migrate(app, db)
 
