@@ -1,8 +1,8 @@
-"""add child and medication models
+"""empty message
 
-Revision ID: 3637acac412a
+Revision ID: 2ea12978d3f9
 Revises: 
-Create Date: 2023-08-07 16:21:35.425671
+Create Date: 2023-09-07 18:32:41.711767
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3637acac412a'
+revision = '2ea12978d3f9'
 down_revision = None
 branch_labels = None
 depends_on = None
